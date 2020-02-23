@@ -34,18 +34,15 @@ def read(*names, **kwargs):
 setup(
     name='my_package',
     version=VERSION,
-    description=None,
-    license=None,
-    author=None,
-    author_email=None,
-    url=None,
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     package_data={"": ["*.txt", "*.rst", "*.sql", "*.ipynb"]},
-    classifiers=[],
-    keywords=[],
     install_requires=[],
     extras_require={},
-    entry_points={},
+    entry_points={
+        "console_scripts": [
+            "my_command = my_package.my_module:main_func",
+        ],
+    },
 )
