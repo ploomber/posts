@@ -34,11 +34,11 @@ metadata = json.loads(table.schema.metadata[b'my_metadata'])
 print('Table has metadata: ')
 pprint(metadata)
 
-# metadata is persisted when you reload the file
+# metadata is persisted when you load the table from disk
 pq.write_table(table, 'table.parquet')
 table = pq.read_table('table.parquet')
-json.loads(table.schema.metadata[b'my_metadata'].decode('utf-8'))
+_ = json.loads(table.schema.metadata[b'my_metadata'].decode('utf-8'))
 
 # you can also load the metadata instead of the complete file
 schema = pq.read_schema('table.parquet')
-json.loads(schema.metadata[b'my_metadata'].decode('utf-8'))
+_ = json.loads(schema.metadata[b'my_metadata'].decode('utf-8'))

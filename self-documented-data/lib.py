@@ -7,7 +7,7 @@ from numpydoc.docscrape import NumpyDocString
 
 def add_metadata(table, metadata, key='my_metadata'):
     """
-    Add json metadata to a pyarrow table under a given key
+    Add json metadata to a pyarrow.Table under a given key
 
     Notes
     -----
@@ -23,7 +23,7 @@ def add_metadata(table, metadata, key='my_metadata'):
 
 def validate_dictionary(dictionary, table, name):
     """
-    Validate dictionary against pandas.DataFrame, warn on missing or extra
+    Validate dictionary against pyarrow.Table, warn on missing or extra
     columns
     """
 
