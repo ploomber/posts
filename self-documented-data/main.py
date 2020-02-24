@@ -26,20 +26,19 @@ def clean_data():
     return table
 
 
-if __name__ == '__main__':
-    # this functions returns a self-documented table
-    table = clean_data()
+# this functions returns a self-documented table
+table = clean_data()
 
-    # print metadata
-    metadata = json.loads(table.schema.metadata[b'my_metadata'])
-    print('Table has metadata: ')
-    pprint(metadata)
+# print metadata
+metadata = json.loads(table.schema.metadata[b'my_metadata'])
+print('Table has metadata: ')
+pprint(metadata)
 
-    # metadata is persisted when you reload the file
-    pq.write_table(table, 'table.parquet')
-    table = pq.read_table('table.parquet')
-    json.loads(table.schema.metadata[b'my_metadata'].decode('utf-8'))
+# metadata is persisted when you reload the file
+pq.write_table(table, 'table.parquet')
+table = pq.read_table('table.parquet')
+json.loads(table.schema.metadata[b'my_metadata'].decode('utf-8'))
 
-    # you can also load the metadata instead of the complete file
-    schema = pq.read_schema('table.parquet')
-    json.loads(schema.metadata[b'my_metadata'].decode('utf-8'))
+# you can also load the metadata instead of the complete file
+schema = pq.read_schema('table.parquet')
+json.loads(schema.metadata[b'my_metadata'].decode('utf-8'))
