@@ -4,11 +4,11 @@
 # draft: true
 # ---
 
-# scikit-learn offers a wide range of Machine Learning models, but it goes way beyond that by providing other tools such as as hyperparameter optimization using `GridSearchCV` or composed estimators via `Pipeline`. One of the characteristics I like the most about scikit-learn is their consistent API, for example, all estimators implement the same basic methods (fit and predict). This consistency has been immensely useful to the ML open source community: if a custom estimator/transformer conforms to scikit-learn's API it will be easy to interface with compatible tools.
+# scikit-learn offers a wide range of Machine Learning models, but it goes way beyond that by providing other tools such as hyperparameter optimization using `GridSearchCV` or composed estimators via `Pipeline`. One of the characteristics I like the most about scikit-learn is their consistent API, all estimators implement the same basic methods (fit and predict). This consistency has been immensely useful to the ML open source community since a lot of third party packages are developed with this in mind (e.g. Keras), hence they are able to interface with each other.
 #
-# Often we want to implement some specific functionality that does not exist in scikit-learn or any other packages, if we conform to scikit-learn's API we can limit ourselves to implement a custom transformer/estimator and still use all of the other scikit-learn modules.
+# Often we need to implement some functionality that does not exist in scikit-learn or any other packages, if we conform to scikit-learn's API we can limit ourselves to develop a custom transformer/estimator and our code will nicely interface with scikit-learn modules.
 #
-# In this blog post, we will show how to build custom transformers and estimators, as well as discuss implementation details to do this correctly. [The official docs](https://scikit-learn.org/stable/developers/develop.html) contain all you need to know but here are the most important facts:
+# In this blog post, I will show how to build custom transformers and estimators, as well as discuss implementation details to do this correctly. [The official docs](https://scikit-learn.org/stable/developers/develop.html) contain all you need to know but here are the most important facts:
 #
 # 1. All constructor (the `__init__` function) parameters should have default values
 # 2. Constructor parameters should be added as attributes *without any modifications*
@@ -147,12 +147,12 @@ class InputGuard(TransformerMixin, BaseEstimator):
 
 # The `sklearn.utils.validation` module provides utility functions to pass some of `check_estimator` tests without having to implement the logic ourselves (I actually had to perform a few modifications to my original implementation, to fix errors thrown by `check_estimator`). These utility functions transform inputs (`check_X_y`, `check_array`) to return the expected format (numpy arrays) and throw the appropriate exceptions when this is not possible. `check_is_fitted` only raises an error if a call to `predict` is attempted without fitting the model first.
 #
-# We now verify that out transformer passes all the tests:
+# We now verify that our transformer passes all the tests:
 
-# if no exceptions are raises, we're good
+# if no exceptions are raised, we're good
 check_estimator(InputGuard)
 
-# Passing all tests is not absolutely necessary for your transformer (or estimator) to integrate correctly with other scikit-learn modules, but doing so assures that your implementation is robust by handling common scenarios on behalf of the user (e.g. passing a 2D array with one column as y instead of a 1D array) and throwing informative errors. Given the large user base scikit-learn has, this is a must, however, for some very customized implementation, passing all the tests is simply not be possible, as we will see in the the custom estimator use case.
+# Passing all tests is not absolutely necessary for your transformer (or estimator) to integrate correctly with other scikit-learn modules, but doing so assures that your implementation is robust by handling common scenarios on behalf of the user (e.g. passing a 2D array with one column as y instead of a 1D array) and throwing informative errors. Given the large user base scikit-learn has, this is a must, however, for some very customized implementation, passing all the tests is simply not possible, as we will see in the the custom estimator use case.
 #
 # For now, let's verify that our transformer plays nicely with Pipeline and GridSearchCV:
 
