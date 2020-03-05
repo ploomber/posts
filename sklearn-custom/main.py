@@ -1,7 +1,6 @@
 # ---
 # title: Developing custom scikit-learn transformers and estimators
 # date: 2020-03-05T17:15:00-05:00
-# draft: true
 # ---
 
 # scikit-learn offers a wide range of Machine Learning models, but it goes way beyond that by providing other tools such as hyperparameter optimization using `GridSearchCV` or composed estimators via `Pipeline`. One of the characteristics I like the most about scikit-learn is their consistent API, all estimators implement the same basic methods (fit and predict). This consistency has been immensely useful to the ML open source community since a lot of third party packages are developed with this in mind (e.g. Keras), hence they are able to interface with each other.
