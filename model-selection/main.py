@@ -137,7 +137,13 @@ dag.build()
 #
 # Developing Machine Learning model is an iterative process, by breaking down the entire pipeline logic in small steps and maximizing code reusability, we can develop short and maintainable pipelines. Jupyter is a superb tool (I use it every day and I'm actually writing this blog post from Jupyter), but do not fall into the habit of coding everything in a big notebook, which inevitably leads to unmaintainable code, prefer many short notebooks (or .py files) over a big single one.
 #
-# This blog post was generated using versions:
+# Source code for this post is available [here]({{url_source}}).
+#
+# Found an error in this post? [Click here to let us know]({{url_issue}}).
+#
+# Looking for commercial support? [Drop us a line](mailto:support@ploomber.io).
+#
+# This blog post was generated using package versions:
 
 # + hide=True
 # ! pip freeze | grep -E "$(cat requirements.txt | paste -sd "," -  |  sed -E 's/,/=|/g')"
