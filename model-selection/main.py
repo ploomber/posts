@@ -39,8 +39,6 @@
 
 # +
 from pathlib import Path
-from sklearn.model_selection import ParameterGrid
-from IPython.display import Markdown, display, HTML
 
 from ploomber.tasks import NotebookRunner
 from ploomber.products import File
