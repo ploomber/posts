@@ -23,7 +23,7 @@
 #
 # We start declaring each of our *model pipelines*, which are callables (objects in Python that we can call such as a function `function` (by doing `function()`) or a class `MyClass` by doing (`MyClass()`). Each model pipeline will return a scikit-learn `Pipeline` instance that will be used in a nested cross-validation loop to choose the best hyperparameters and estimate generalization performance. Content is as follows:
 #
-# {{expand('factories.py')}}
+# {{expand('pipelines.py')}}
 #
 # We have one factory for NuSVR and another one Ridge Regression. Since these two models are sensitive to scaling, we include them in a scikit-learn pipeline that scales all features before feeding the data into the model.
 #
@@ -79,7 +79,7 @@ params_nusvr = {
 
 # +
 # load report source code
-notebook = Path('nb.py').read_text()
+notebook = Path('report.py').read_text()
 
 # we will save all notebooks in the artifacts/ folder
 out = Path('artifacts')
