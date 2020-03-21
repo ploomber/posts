@@ -1,5 +1,6 @@
 # ---
 # title: Model selection with scikit-learn and ploomber
+# date: 2020-03-20T14:00:00-05:00
 # ---
 
 # *Note*: This blog post assumes you are familiar with the model selection framework via [nested cross-validation](https://sebastianraschka.com/blog/2018/model-evaluation-selection-part4.html#nested-cross-validation) and with the following scikit-learn modules (click for documentation): [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html), [`cross_val_predict`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_predict.html) and [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html).
@@ -121,7 +122,7 @@ for name, params in params_all.items():
 
 dag.build()
 
-# That's it. After building the DAG, each model will generate one report, you can see them here (TODO: add link).
+# That's it. After building the DAG, each model will generate one report, you can preview one of them by [clicking here](https://ploomber.github.io/posts/model-selection/artifacts/rf)
 #
 # Splitting logic into separate files improves readability and maintainability, if we want to add another model we only have to add a new dictionary with the parameter grid, if preprocessing is needed, we just add a factory in `pipelines.py`.
 #
