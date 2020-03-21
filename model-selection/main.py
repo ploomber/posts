@@ -3,9 +3,9 @@
 # date: 2020-03-20T14:00:00-05:00
 # ---
 
-# *Note*: This blog post assumes you are familiar with the model selection framework via [nested cross-validation](https://sebastianraschka.com/blog/2018/model-evaluation-selection-part4.html#nested-cross-validation) and with the following scikit-learn modules (click for documentation): [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html), [`cross_val_predict`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_predict.html) and [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html).
+# Model selection is an important part of any Machine Learning task. Since each model encodes their own [inductive bias](https://en.wikipedia.org/wiki/Inductive_bias), it is important to compare them to understand their subtleties and choose the best one for the problem at hand. While knowing each learning algorithm in detail is important to have an intuition about which ones to try, it is always helpful to visualize actual results in our data.
 #
-# Model selection is an important part of any Machine Learning task. Since each model encodes their own [inductive bias](https://en.wikipedia.org/wiki/Inductive_bias), it is important to compare them to understand their subtleties and choose the best one for the problem at hand. While knowing the details of each learning algorithm is important to have an intuition about which ones we want to try, it is always helpful to visualize actual results in our data.
+# *Note*: This blog post assumes you are familiar with the model selection framework via [nested cross-validation](https://sebastianraschka.com/blog/2018/model-evaluation-selection-part4.html#nested-cross-validation) and with the following scikit-learn modules (click for documentation): [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html), [`cross_val_predict`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_predict.html) and [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html).
 #
 # The quick and dirty approach for model selection would be to have a long Jupyter notebook, where we train all models and output charts for each one. In this post we will show how to achieve this in a cleaner way by using scikit-learn and [ploomber](https://github.com/ploomber/ploomber).
 #
@@ -21,7 +21,7 @@
 #
 # ## Functions to instantiate pipelines (`pipelines.py`)
 #
-# We start declaring each of our *model pipelines*, which are callables (objects in Python that we can call such as a function `function` (by doing `function()`) or a class `MyClass` by doing (`MyClass()`). Each model pipeline will return a scikit-learn `Pipeline` instance that will be used in a nested cross-validation loop to choose the best hyperparameters and estimate generalization performance. Content is as follows:
+# We start declaring each of our *model pipelines*, which are just functions that return a scikit-learn `Pipeline` instance, we will use this in a nested cross-validation loop to choose the best hyperparameters and estimate generalization performance.
 #
 # {{expand('pipelines.py')}}
 #
@@ -106,14 +106,6 @@ for name, params in params_all.items():
                    name=name,
                    # pass the parameters
                    params=params,
-                   # we are passing pyhon code
-                   # that will first be converted
-                   # to a jupyter notebook using
-                   # jupytext, then executed
-                   # with the passed parameters
-                   # using papermill and finally,
-                   # converted to HTML using nbconvert
-                   # with ploomber coordinating execution
                    ext_in='py',
                    kernelspec_name='python3')
 # -
@@ -122,7 +114,7 @@ for name, params in params_all.items():
 
 dag.build()
 
-# That's it. After building the DAG, each model will generate one report, you can preview one of them by [clicking here](https://ploomber.github.io/posts/model-selection/artifacts/rf)
+# That's it. After building the DAG, each model will generate one report, you can see them here: [Ridge](https://ploomber.github.io/posts/model-selection/artifacts/ridge), [Random Forest](https://ploomber.github.io/posts/model-selection/artifacts/rf) and [NuSVR](https://ploomber.github.io/posts/model-selection/artifacts/nusvr).
 #
 # Splitting logic into separate files improves readability and maintainability, if we want to add another model we only have to add a new dictionary with the parameter grid, if preprocessing is needed, we just add a factory in `pipelines.py`.
 #
@@ -146,6 +138,5 @@ dag.build()
 #
 # This blog post was generated using package versions:
 
-# + hide=True
+# + hide=true
 # ! pip freeze | grep -E "$(cat requirements.txt | paste -sd "," -  |  sed -E 's/,/=|/g')"
-# -
