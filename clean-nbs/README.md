@@ -2,10 +2,10 @@
 
 ## Layout
 
-`exploratory/` - Exploratory notebooks (raw data reference)
-`src/` - Utility code
-`tasks/` - Pipeline tasks (`.py` scripts that can open as notebooks in Jupyter)
-`tests/` - Tests for code in `src/`
+* `exploratory/` - Exploratory notebooks (raw data reference)
+* `src/` - Utility code
+* `tasks/` - Pipeline tasks (`.py` scripts that can open as notebooks in Jupyter)
+* `tests/` - Tests for code in `src/`
 
 ## Instructions
 
