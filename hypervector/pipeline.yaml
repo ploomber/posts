@@ -1,0 +1,25 @@
+tasks:
+  - source: scripts/get.py
+    product:
+      nb: products/get.ipynb
+      data: products/get.csv
+
+  - source: scripts/petal-area.py
+    product:
+      nb: products/petal-area.ipynb
+      data: products/petal-area.csv
+
+  - source: scripts/sepal-area.py
+    product:
+      nb: products/sepal-area.ipynb
+      data: products/sepal-area.csv
+
+  - source: scripts/fit.py
+    product:
+      nb: products/fit.ipynb
+      model: products/model.pickle
+    # this executes when fit.py finishes
+    on_finish:
+      dotted_path: tests.predictions
+      # by default this is true, can change value using the command line
+      test: '{{test}}'
