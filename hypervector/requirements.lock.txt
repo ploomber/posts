@@ -79,7 +79,7 @@ Send2Trash==1.8.0
 six==1.16.0
 sklearn-evaluation==0.5.6
 SQLAlchemy==1.4.23
-sqlparse==0.4.1
+sqlparse==0.4.2
 tabulate==0.8.9
 tenacity==8.0.1
 terminado==0.11.1
