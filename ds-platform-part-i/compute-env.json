@@ -1,0 +1,28 @@
+{
+    "computeEnvironmentName": "ploomber-batch-computer-environment",
+    "type": "MANAGED",
+    "state": "ENABLED",
+    "computeResources": {
+        "type": "EC2",
+        "minvCpus": 0,
+        "maxvCpus": 128,
+        "desiredvCpus": 48,
+        "instanceTypes": [
+            "c4.large",
+            "c4.xlarge",
+            "c4.2xlarge",
+            "c4.4xlarge",
+            "c4.8xlarge"
+        ],
+        "subnets": [
+            "subnet-0a45e4e1e5ab59f21"
+        ],
+        "securityGroupIds": [
+            "sg-064a3c19c5a4530ec"
+        ],
+        "instanceRole": "ploomber-ecs-instance-role",
+        "tags": {
+            "Name": "Ploomber Compute Environment - C4OnDemand"
+        }
+    }
+}

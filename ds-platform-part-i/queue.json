@@ -1,0 +1,11 @@
+{
+    "jobQueueName": "ploomber-batch-queue",
+    "state": "ENABLED",
+    "priority": 1,
+    "computeEnvironmentOrder": [
+        {
+            "order": 1,
+            "computeEnvironment": "ploomber-batch-computer-environment"
+        }
+    ]
+}
