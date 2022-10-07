@@ -39,17 +39,19 @@ aws-env:
   repository: $repository
 """)
 
+
 class CLI:
 
     def __init__(self) -> None:
         parser = argparse.ArgumentParser()
         parser.add_argument('command')
         args = parser.parse_args(sys.argv[1:2])
+        command = args.command.replace('-', '_')
 
-        if not hasattr(self, args.command):
-            sys.exit(f'Unrecognized command {args.command!r}')
+        if not hasattr(self, command):
+            sys.exit(f'Unrecognized command {command!r}')
         else:
-            cmd = getattr(self, args.command)
+            cmd = getattr(self, command)
 
             try:
                 cmd()
@@ -62,7 +64,7 @@ class CLI:
         chars = string.ascii_lowercase + string.digits
         suffix = ''.join(random.choice(chars) for i in range(6))
         print(f'ploomber-bucket-{suffix}')
-    
+
     def client(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--directory", type=str)
@@ -79,7 +81,8 @@ class CLI:
         args = parser.parse_args(sys.argv[2:])
 
         path = Path("s3-policy.json")
-        path.write_text(template_policy.substitute(bucket_name=args.bucket_name))
+        path.write_text(
+            template_policy.substitute(bucket_name=args.bucket_name))
         print(f"Policy file stored at: {path!s}")
 
     def config(self):
@@ -91,10 +94,25 @@ class CLI:
         args = parser.parse_args(sys.argv[2:])
 
         path = Path(args.directory, "soopervisor.yaml")
-        path.write_text(template_cfg.substitute(queue=args.queue,
-                                                region=args.region,
-                                                repository=args.repository))
+        path.write_text(
+            template_cfg.substitute(queue=args.queue,
+                                    region=args.region,
+                                    repository=args.repository))
         print(f"Config file stored at: {path!s}")
-        
+
+    def client_cfg(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--directory", type=str)
+        args = parser.parse_args(sys.argv[2:])
+
+        path = Path(args.directory, "pipeline.yaml")
+        content = path.read_text()
+        cfg = """\
+clients:
+    File: clients.get
+"""
+        path.write_text(cfg + '\n' + content)
+
+
 if __name__ == '__main__':
     CLI()
