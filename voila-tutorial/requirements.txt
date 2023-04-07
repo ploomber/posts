@@ -5,3 +5,4 @@ bqplot
 numpy
 jupysql
 ipywidgets
+duckdb-engine
