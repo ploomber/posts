@@ -18,7 +18,7 @@
          from pyodide.http import open_url
          from pyodide.ffi import create_proxy
          
-         url = "https://raw.githubusercontent.com/ploomber/posts/pyscript/notebook-to-dashboard/Spotify_Youtube.csv"
+         url = "https://raw.githubusercontent.com/ploomber/posts/master/notebook-to-dashboard/Spotify_Youtube.csv"
          df = pd.read_csv(open_url(url))
          
          current_selected = []
@@ -64,14 +64,14 @@
      
      <div id="input" style="margin: 20px;">
       Select Album_type : <br/>
-<input type="radio" id="all" name="Album_type" value="ALL">
-<label for="all"> All</label>
-<input type="radio" id="album" name="Album_type" value="album">
-<label for="album"> album </label>
-<input type="radio" id="single" name="Album_type" value="single">
-<label for="single"> single </label>
-<input type="radio" id="compilation" name="Album_type" value="compilation">
-<label for="compilation"> compilation </label>
+      <input type="radio" id="all" name="Album_type" value="ALL">
+      <label for="all"> All</label>
+      <input type="radio" id="album" name="Album_type" value="album">
+      <label for="album"> album </label>
+      <input type="radio" id="single" name="Album_type" value="single">
+      <label for="single"> single </label>
+      <input type="radio" id="compilation" name="Album_type" value="compilation">
+      <label for="compilation"> compilation </label>
 
 
      </div>
