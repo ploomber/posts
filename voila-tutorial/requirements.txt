@@ -6,3 +6,4 @@ numpy
 jupysql
 ipywidgets
 duckdb-engine
+kaggle
