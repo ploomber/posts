@@ -1,0 +1,87 @@
+<html> 
+     <head> 
+     <title>YouTube and Spotify artists</title>
+     <meta charset="utf-8">
+     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+     </head>
+     <body>
+     <py-config> 
+         packages = [ "pandas", "matplotlib" ]
+     </py-config>
+     <py-script>
+         
+         import pandas as pd
+         import urllib.request
+         import matplotlib.pyplot as plt
+         
+         from pyodide.http import open_url
+         from pyodide.ffi import create_proxy
+         
+         url = "https://raw.githubusercontent.com/ploomber/posts/master/notebook-to-dashboard/Spotify_Youtube.csv"
+         df = pd.read_csv(open_url(url))
+         
+         current_selected = []
+         filter_elements = js.document.getElementsByName( "Album_type" )
+         
+         def plot(df):
+             plt.rcParams["figure.figsize"] = (15, 10)
+             df_views = df.groupby('Artist')['Views'].sum().sort_values(ascending=False)[:10]
+             df_streams = df.groupby('Artist')['Stream'].sum().sort_values(ascending=False)[:10]
+             fig, (ax1, ax2) = plt.subplots(1, 2)
+             ax1.set_title('Top 10 Artists on YouTube')
+             df_views.plot(kind='bar', ax=ax1)
+             ax2.set_title('Top 10 Artists on Spotify')
+             df_streams.plot(kind='bar', ax=ax2)
+             ax1.set_xlabel('Artist')
+             ax1.set_ylabel('Views')
+             ax2.set_xlabel('Artist')
+             ax2.set_ylabel('Streams')
+             display(fig, target="graph-area", append=False)
+             
+         def select_filter(event):
+            for ele in filter_elements:
+              if ele.checked:
+                  current_selected = ele.value
+                  break
+            if current_selected == "ALL":
+              plot(df)
+            else:
+              filter = df.apply(lambda x: ele.value in x[ "Album_type" ], axis=1)
+              plot(df[filter])
+              
+         ele_proxy = create_proxy(select_filter)
+         
+         for ele in filter_elements:
+          if ele.value == "ALL":
+            ele.checked = True
+            current_selected = ele.value
+          ele.addEventListener("change", ele_proxy)
+         
+         plot(df)
+        
+     </py-script>
+     
+     <div id="input" style="margin: 20px;">
+      Select Album_type : <br/>
+      <input type="radio" id="all" name="Album_type" value="ALL">
+      <label for="all"> All</label>
+      <input type="radio" id="album" name="Album_type" value="album">
+      <label for="album"> album </label>
+      <input type="radio" id="single" name="Album_type" value="single">
+      <label for="single"> single </label>
+      <input type="radio" id="compilation" name="Album_type" value="compilation">
+      <label for="compilation"> compilation </label>
+
+
+     </div>
+
+    <py-repl>
+      df
+    </py-repl>
+
+    <div id="graph-area"></div>
+    
+     </body>
+     </html>
+      
