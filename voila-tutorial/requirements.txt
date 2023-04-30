@@ -7,3 +7,4 @@ jupysql
 ipywidgets
 duckdb-engine
 kaggle
+pandas
