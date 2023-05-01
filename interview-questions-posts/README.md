@@ -1,6 +1,6 @@
 ## Day 1
 
-** Link to interactive notebook ** https://tinyurl.com/sql-day-1
+**Link to interactive notebook** https://tinyurl.com/sql-day-1
 
 Question 1 (Easy):
 How many records are there in the 'absenteeism' table? 
