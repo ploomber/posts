@@ -1,6 +1,6 @@
 ## Day 1
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ploomber/posts/interview-questions?labpath=interview-questions-posts%2Fday_1.ipynb)
+** Link to interactive notebook ** https://tinyurl.com/sql-day-1
 
 Question 1 (Easy):
 How many records are there in the 'absenteeism' table? 
