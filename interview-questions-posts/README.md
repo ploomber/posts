@@ -38,3 +38,16 @@ What is the average absenteeism time for employees with BMI higher than the aver
 
 Question 3 (Hard):
 Which reasons for absence are more frequent for social drinkers than social non-drinkers?
+
+## Day 4 
+
+**Link to interactive notebook** https://tinyurl.com/sql-day4
+
+Question 1 (Easy):
+How many employees are social drinkers?
+
+Question 2 (Medium):
+What is the average distance from residence to work for each education level?
+
+Question 3 (Hard):
+Find employees whose total absenteeism hours are above the average. 
