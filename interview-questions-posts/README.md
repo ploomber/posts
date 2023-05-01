@@ -25,3 +25,16 @@ What is the average transportation expense for each season?
 
 Question 3 (Hard):
 Find the age of employees who have been absent for more than 5 hours with an unjustified absence.
+
+## Day 3
+
+**Link to interactive notebook** https://tinyurl.com/sql-day3
+
+Question 1 (Easy):
+What is the average distance from residence to work? 
+
+Question 2 (Medium):
+What is the average absenteeism time for employees with BMI higher than the average BMI
+
+Question 3 (Hard):
+Which reasons for absence are more frequent for social drinkers than social non-drinkers?
