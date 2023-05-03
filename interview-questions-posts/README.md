@@ -1,3 +1,88 @@
+Notebook format:
+
+* Introduction to the data (title, source)
+* Dataset description
+* Install command, example
+
+```
+try:
+    %pip install jupysql --quiet
+    print("Success")
+except:
+    print("retry installing")
+```
+
+* Imports
+* Load the data
+
+```
+import requests
+import zipfile
+import io
+import pandas as pd
+from sqlalchemy.engine import create_engine
+
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00445/Absenteeism_at_work_AAA.zip"
+
+# download the ZIP file
+response = requests.get(url)
+
+# extract the contents of the ZIP file
+zf = zipfile.ZipFile(io.BytesIO(response.content))
+df = pd.read_csv(zf.open("Absenteeism_at_work.csv"), sep=";", index_col=0)
+
+# Replace spaces with underscores in the column names
+df.columns = [c.replace(" ", "_").replace("/","_per_") for c in df.columns]
+```
+
+* Store data in db
+
+```
+engine = create_engine("sqlite://")
+
+df.to_sql("absenteeism", engine)
+```
+
+* Load engine
+
+```
+%load_ext sql
+%sql engine
+```
+
+* Sample usage
+
+```
+%%sql 
+SELECT *
+FROM absenteeism 
+LIMIT 5
+```
+
+* Question 1: Verbal question, followed by a cell with the magic initialized
+
+```
+%%sql
+```
+
+Hidden answer in markdown format. 
+
+* Question 2: Verbal question, followed by a cell with the magic initialized
+
+```
+%%sql
+```
+
+Hidden answer in markdown format. 
+
+* Question 3: Verbal question, followed by a cell with the magic initialized
+
+```
+%%sql
+```
+
+Hidden answer in markdown format. 
+
 ## Day 1
 
 **Link to interactive notebook** https://tinyurl.com/sql-day-1
