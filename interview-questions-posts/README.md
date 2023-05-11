@@ -95,7 +95,7 @@ Hidden answer in markdown format.
 
 * Bonus: Save the tables you created using the `--save` option, use the saved tables to generate visualizations.
 
-Here a couple tutorials to get you started:
+Here are a few tutorials to get you started:
 
 Parameterizing SQL queries: https://jupysql.ploomber.io/en/latest/user-guide/template.html
 
@@ -106,6 +106,8 @@ Organizing Large queries: https://jupysql.ploomber.io/en/latest/compose.html
 Plotting with ggplot: https://jupysql.ploomber.io/en/latest/user-guide/ggplot.html
 
 Turning your notebook into a Voila dashboard: https://ploomber.io/blog/voila-tutorial/
+
+---------------------
 
 ## Day 1
 
