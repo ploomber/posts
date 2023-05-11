@@ -2,7 +2,19 @@ Notebook format:
 
 * Introduction to the data (title, source)
 * Dataset description
+
+* 5 minute crash course into JupySQL
+
+Play the following video to get familiar with JupySQL to execute queries on Jupyter using DuckDB.
+
+<b>If you get stuck, join our Slack community!</b> https://ploomber.io/community
+
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/CsWEUYLaYU0/0.jpg)](https://www.youtube.com/watch?v=CsWEUYLaYU0)
+
 * Install command, example
+
+
 
 ```
 try:
@@ -16,39 +28,37 @@ except:
 * Load the data
 
 ```
-import requests
-import zipfile
-import io
-import pandas as pd
-from sqlalchemy.engine import create_engine
+from urllib.request import urlretrieve
+from zipfile import ZipFile
 
 url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00445/Absenteeism_at_work_AAA.zip"
 
-# download the ZIP file
-response = requests.get(url)
+# download the file
+urlretrieve(url, "Absenteeism_at_work_AAA.zip")
 
-# extract the contents of the ZIP file
-zf = zipfile.ZipFile(io.BytesIO(response.content))
-df = pd.read_csv(zf.open("Absenteeism_at_work.csv"), sep=";", index_col=0)
+# Extract the CSV file
+with ZipFile("Absenteeism_at_work_AAA.zip", 'r') as zf:
+    zf.extractall()
 
-# Replace spaces with underscores in the column names
-df.columns = [c.replace(" ", "_").replace("/","_per_") for c in df.columns]
-```
-
-* Store data in db
-
-```
-engine = create_engine("sqlite://")
-
-df.to_sql("absenteeism", engine)
+# Check the extracted CSV file name (in this case, it's "Absenteeism_at_work.csv")
+csv_file_name = "Absenteeism_at_work.csv"
 ```
 
 * Load engine
 
 ```
-%load_ext sql
-%sql engine
+%reload_ext sql
+%sql duckdb:///absenteeism.duck.db
 ```
+
+* Create table
+
+```
+%%sql
+create or replace table absenteeism as
+from read_csv_auto('Absenteeism_at_work.csv', header=True, sep=';')
+```
+
 
 * Sample usage
 
@@ -82,6 +92,20 @@ Hidden answer in markdown format.
 ```
 
 Hidden answer in markdown format. 
+
+* Bonus: Save the tables you created using the `--save` option, use the saved tables to generate visualizations.
+
+Here a couple tutorials to get you started:
+
+Parameterizing SQL queries: https://jupysql.ploomber.io/en/latest/user-guide/template.html
+
+SQL Plot: https://jupysql.ploomber.io/en/latest/api/magic-plot.html
+
+Organizing Large queries: https://jupysql.ploomber.io/en/latest/compose.html
+
+Plotting with ggplot: https://jupysql.ploomber.io/en/latest/user-guide/ggplot.html
+
+Turning your notebook into a Voila dashboard: https://ploomber.io/blog/voila-tutorial/
 
 ## Day 1
 
