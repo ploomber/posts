@@ -4,6 +4,10 @@ The series of Jupyter notebooks under this folder `interview-questions-posts` ha
 
 The notebooks are curated, meaning they have a dataset, a starter guide on using JupySQL, and a set of questions relevant to the dataset. 
 
+Each of the notebooks will have a Google colab link associated to them, and the links to the colab notebooks will be shared on social media (LinkedIn, Twitter, Mastodon).
+
+Below you can get a snapshot of the format of the notebooks. Use this as a template for future notebooks.
+
 
 ## Notebook format
 
