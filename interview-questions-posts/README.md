@@ -1,4 +1,11 @@
-Notebook format:
+## Context
+
+The series of Jupyter notebooks under this folder `interview-questions-posts` have the purpose of giving members of the community a chance to use JupySQL to interact with databases. 
+
+The notebooks are curated, meaning they have a dataset, a starter guide on using JupySQL, and a set of questions relevant to the dataset. 
+
+
+## Notebook format
 
 * Introduction to the data (title, source)
 * Dataset description
