@@ -122,7 +122,7 @@ Turning your notebook into a Voila dashboard: https://ploomber.io/blog/voila-tut
 
 ## Day 1
 
-**Link to interactive notebook** https://tinyurl.com/jupysql-day1
+**Link to interactive notebook** [https://tinyurl.com/jupysql-day1](https://tinyurl.com/jupysql-day1-prod)
 
 Question 1 (Easy):
 How many records are there in the 'absenteeism' table? 
@@ -137,7 +137,7 @@ Find the top 3 ages with the highest total absenteeism hours, excluding discipli
 
 ## Day 2
 
-**Link to interactive notebook** https://tinyurl.com/jupysql-day2 
+**Link to interactive notebook** [https://tinyurl.com/jupysql-day2](https://tinyurl.com/jupysql-day2-prod) 
 
 Question 1 (Easy):
 How many unique employees are listed in the dataset?
@@ -150,7 +150,7 @@ Find the age of employees who have been absent for more than 5 hours with an unj
 
 ## Day 3
 
-**Link to interactive notebook** https://tinyurl.com/jupysql-day3
+**Link to interactive notebook** [https://tinyurl.com/jupysql-day3](https://tinyurl.com/jupysql-day3-prod)
 
 Question 1 (Easy):
 What is the average distance from residence to work? 
@@ -163,7 +163,7 @@ Which reasons for absence are more frequent for social drinkers than social non-
 
 ## Day 4 
 
-**Link to interactive notebook** https://tinyurl.com/jupysql-day4
+**Link to interactive notebook** [https://tinyurl.com/jupysql-day4](https://tinyurl.com/jupysql-day4-prod)
 
 Question 1 (Easy):
 How many employees are social drinkers?
