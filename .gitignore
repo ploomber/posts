@@ -137,3 +137,9 @@ dmypy.json
 *.csv
 *.json
 *.xlsx
+*.db
+*.db.wal
+*.arff
+*.docx
+*.zip
+*.xls
