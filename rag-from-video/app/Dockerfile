@@ -1,7 +1,6 @@
 FROM python:3.11
 
 COPY app.py app.py
-COPY chat.py chat.py
 COPY .env .env
 COPY requirements.txt requirements.txt
 COPY static/ static/
