@@ -1,3 +1,4 @@
 haystack-ai
 elasticsearch-haystack
 solara
+python-dotenv
