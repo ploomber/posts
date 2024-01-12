@@ -58,31 +58,30 @@ def convert_video_to_audio(file_name):
 # Usage
 load_dotenv(".env")
 openaikey = os.getenv("OPENAI")
-elastic_search_cloud_id = os.getenv("elastic_search_cloud_id")
 elastic_search_host = os.getenv("elastic_search_host")
 elastic_username = os.getenv("elastic_username")
 elastic_password = os.getenv("elastic_password")
 
 
 # Insert Local Video File Path
-# file_names = ["JPL-20230403-Mars Report Ingenuity Updates April 2023_UHD~small.mp4",
-#               "JPL-20230406-TECHf-0001-Ingenuity Flight Update Media Reel 1080~small.mp4",
-#               "JPL-20230516-M2020f-0002-Sounds of Mars NoVoiceOver~small.mp4",
-#               "JPL-20230607-MARSf-0001-Mars Report Whats in A Name~small.mp4",
-#               "JPL-20231227-M2020f-0001-Perseverance Rover Zooms in on Ancient Mars River~small.mp4",
-#               "Naming a Mountain on the Moon on This Week @NASA – February 17, 2023~small.mp4",
-#               "NASA Administrator Bill Nelson - A Look Back at Two Years of Success~small.mp4",
-#               "The Next Crew Headed to the Space Station on This Week at NASA – February 24, 2023~small.mp4",
-#               "What the Webb Telescope Found Way Back in the Early Universe on This Week @NASA – July 7, 2023~small.mp4",
-            # "Ep278_Mars Ep_8 Sticking the Landing on Mars.mp3",
-            #   "Ep279_Mars Ep_9 Welcome to Mars.mp3",
-            #   "Ep280_Mars Ep_10 Suit Up for Mars.mp3",
-#  "Ep281_Mars Ep_11 Returning the First Martians.mp3"
-#               ]
+file_names = ["JPL-20230403-Mars Report Ingenuity Updates April 2023_UHD~small.mp4",
+              "JPL-20230406-TECHf-0001-Ingenuity Flight Update Media Reel 1080~small.mp4",
+              "JPL-20230516-M2020f-0002-Sounds of Mars NoVoiceOver~small.mp4",
+              "JPL-20230607-MARSf-0001-Mars Report Whats in A Name~small.mp4",
+              "JPL-20231227-M2020f-0001-Perseverance Rover Zooms in on Ancient Mars River~small.mp4",
+              "Naming a Mountain on the Moon on This Week @NASA – February 17, 2023~small.mp4",
+              "NASA Administrator Bill Nelson - A Look Back at Two Years of Success~small.mp4",
+              "The Next Crew Headed to the Space Station on This Week at NASA – February 24, 2023~small.mp4",
+              "What the Webb Telescope Found Way Back in the Early Universe on This Week @NASA – July 7, 2023~small.mp4",
+              "Ep278_Mars Ep_8 Sticking the Landing on Mars.mp3",
+              "Ep279_Mars Ep_9 Welcome to Mars.mp3",
+              "Ep280_Mars Ep_10 Suit Up for Mars.mp3",
+            "Ep281_Mars Ep_11 Returning the First Martians.mp3"
+              ]
 
 # Convert Video to Audio
-# for file_name in file_names:
-#     convert_video_to_audio(file_name)
+for file_name in file_names:
+    convert_video_to_audio(file_name)
 
 print("Initializing indexing pipeline...")
 # Build indexing pipeline - local development only
