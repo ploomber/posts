@@ -39,11 +39,12 @@ def convert_video_to_audio(file_name):
 
     print("Transforming video to audio...")
 
-    # Generate Video File Clip
-    clip = mp.VideoFileClip(path_to_video)
+    if "mp4" in file_name or 'mov' in file_name:
+        # Generate Video File Clip
+        clip = mp.VideoFileClip(path_to_video)
 
-    # Generate Audio File
-    clip.audio.write_audiofile(path_to_audio)
+        # Generate Audio File
+        clip.audio.write_audiofile(path_to_audio)
 
     # make a directory under chunked_audio with the file_name as the folder name
     Path(f"./chunked_audio/{file_name.split('.')[0]}").mkdir(parents=True, exist_ok=True)
@@ -64,12 +65,24 @@ elastic_password = os.getenv("elastic_password")
 
 
 # Insert Local Video File Path
-file_names = ["./movie_files/my_video1.mov",
-              "./movie_files/my_video2.mov",]
+# file_names = ["JPL-20230403-Mars Report Ingenuity Updates April 2023_UHD~small.mp4",
+#               "JPL-20230406-TECHf-0001-Ingenuity Flight Update Media Reel 1080~small.mp4",
+#               "JPL-20230516-M2020f-0002-Sounds of Mars NoVoiceOver~small.mp4",
+#               "JPL-20230607-MARSf-0001-Mars Report Whats in A Name~small.mp4",
+#               "JPL-20231227-M2020f-0001-Perseverance Rover Zooms in on Ancient Mars River~small.mp4",
+#               "Naming a Mountain on the Moon on This Week @NASA – February 17, 2023~small.mp4",
+#               "NASA Administrator Bill Nelson - A Look Back at Two Years of Success~small.mp4",
+#               "The Next Crew Headed to the Space Station on This Week at NASA – February 24, 2023~small.mp4",
+#               "What the Webb Telescope Found Way Back in the Early Universe on This Week @NASA – July 7, 2023~small.mp4",
+            # "Ep278_Mars Ep_8 Sticking the Landing on Mars.mp3",
+            #   "Ep279_Mars Ep_9 Welcome to Mars.mp3",
+            #   "Ep280_Mars Ep_10 Suit Up for Mars.mp3",
+#  "Ep281_Mars Ep_11 Returning the First Martians.mp3"
+#               ]
 
 # Convert Video to Audio
-for file_name in file_names:
-    convert_video_to_audio(file_name)
+# for file_name in file_names:
+#     convert_video_to_audio(file_name)
 
 print("Initializing indexing pipeline...")
 # Build indexing pipeline - local development only

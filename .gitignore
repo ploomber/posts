@@ -143,3 +143,5 @@ dmypy.json
 *.docx
 *.zip
 *.xls
+*.mp4
+*.mp3

@@ -14,7 +14,11 @@ import os
 
 load_dotenv(".env")
 openaikey = os.getenv("OPENAI")
-
+elastic_search_cloud_id = os.getenv("elastic_search_cloud_id")
+elastic_search_host = os.getenv("elastic_search_host")
+elastic_username = os.getenv("elastic_username")
+elastic_password = os.getenv("elastic_password")
+#
 # Build RAG pipeline
 print("Initializing QA pipeline")
 prompt_template = """\
@@ -31,7 +35,9 @@ Use the following context to answer the user's question in a friendly manner. \
 {{query}}
 """
 
-document_store = ElasticsearchDocumentStore(hosts= "http://localhost:9200/")
+#document_store = ElasticsearchDocumentStore(hosts= "http://localhost:9200/")
+document_store = ElasticsearchDocumentStore(hosts=elastic_search_host,
+                                            basic_auth=(elastic_username, elastic_password))
 
 prompt_builder = PromptBuilder(prompt_template)
 ############################################
