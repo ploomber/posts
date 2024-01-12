@@ -24,7 +24,7 @@ print("Initializing QA pipeline")
 prompt_template = """\
 Use the following context to answer the user's question in a friendly manner. \
     If the context provided doesn't answer the question - \
-        please respond with: "I don't know".
+        please respond with: "There is no information in my knowledge base about this".
 
 ### CONTEXT
 {% for doc in documents %}
@@ -145,7 +145,13 @@ def Chat() -> None:
         [
             Message(
                 role="assistant",
-                content=f"Welcome. Please post your queries!"
+                content=f"Welcome. Please post your queries! My knowledge base\
+                    has been curated on a small collection of videos from NASA.  \
+                    This collection of videos consist of short clips that talk \
+                    about the topics: Mars Perseverance Rover.\
+                    Sample questions: \n\nWhat is the Mars Perseverance Rover? \
+                        What is the Mars Perseverance Rover mission? \
+                        Tell me about the helicopter on Mars."
             )
         ]
     )
@@ -185,7 +191,12 @@ def Page():
         solara.Text("Deepen your understanding of our video collection through a Q&A AI assistant")
 
     with solara.Card(title="About", elevation=6, style="background-color: #f5f5f5;"):
-        solara.Markdown("Ask questions about our curated database of video using advanced AI tools.")
+        with solara.Row(justify="center"):
+            solara.Image(image="static/nasa-logo.svg", width="100")  # Adjust width and height as needed
+
+        solara.Markdown("Ask questions about our curated database of video using advanced AI tools. \n \
+                        This database is curated from the following list of videos: \n \
+                        https://images.nasa.gov/search?q=nasa%20perseverance%20rover&page=1&media=video&yearStart=2023&yearEnd=2024")
                
     solara.Style(css)
     with solara.VBox(classes=["main"]):
