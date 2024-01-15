@@ -171,7 +171,7 @@ def Chat() -> None:
             set_messages(_messages + [Message(role="assistant", content=rag_response)])
 
         except Exception as e:
-            set_messages(_messages + [Message(role="assistant", content="Cannot answer your current question. Please try again")])
+            set_messages(_messages + [Message(role="assistant", content=f"Cannot answer your current question. Please try again {e}")])
 
     with solara.VBox():
         for message in messages:

@@ -1,4 +1,5 @@
-haystack-ai
-elasticsearch-haystack
+haystack-ai==2.0.0b3
+elasticsearch-haystack==0.1.2
 solara
 python-dotenv
+sentence-transformers>=2.2.0
