@@ -1,110 +1,117 @@
-import streamlit as st
+import dash
+from dash import html, dcc
+import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
-import plotly.express as px
+from datetime import datetime, timedelta
 
+# Generate sample sales data
+np.random.seed(42)
+dates = pd.date_range(start="2023-01-01", end="2023-12-31", freq="D")
+sales = np.random.normal(1000, 200, len(dates))
+products = ["Product A", "Product B", "Product C", "Product D"]
+product_sales = {p: np.random.normal(1000, 200, len(dates)) for p in products}
 
-def display_dashboard():
-    # Generate mock sales data
-    np.random.seed(42)
-    dates = pd.date_range(start="2023-01-01", end="2023-12-31", freq="D")
-    n_products = 5
-    products = ["Product A", "Product B", "Product C", "Product D", "Product E"]
-
-    data = {
-        "Date": np.repeat(dates, n_products),
-        "Product": np.tile(products, len(dates)),
-        "Sales": np.random.normal(1000, 200, len(dates) * n_products).round(2),
-        "Units": np.random.randint(50, 200, len(dates) * n_products),
+df = pd.DataFrame(
+    {
+        "Date": dates,
+        "Total_Sales": sales,
+        **{f"{p}_Sales": product_sales[p] for p in products},
     }
+)
 
-    df = pd.DataFrame(data)
+# Initialize the Dash app
+app = dash.Dash(__name__)
 
-    # Add some seasonality to sales
-    df["Sales"] = df["Sales"] * (
-        1 + 0.3 * np.sin(2 * np.pi * (df["Date"].dt.month - 1) / 12)
-    )
-
-    # Key metrics
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        total_sales = df["Sales"].sum()
-        st.metric("Total Sales", f"${total_sales:,.2f}")
-    with col2:
-        total_units = df["Units"].sum()
-        st.metric("Total Units Sold", f"{total_units:,}")
-    with col3:
-        avg_order = total_sales / total_units
-        st.metric("Average Order Value", f"${avg_order:.2f}")
-
-    # Time series plot
-    st.subheader("Sales Trend Over Time")
-    daily_sales = df.groupby(["Date", "Product"])["Sales"].sum().reset_index()
-    fig_trend = px.line(
-        daily_sales,
-        x="Date",
-        y="Sales",
-        color="Product",
-        title="Daily Sales by Product",
-    )
-    st.plotly_chart(fig_trend, use_container_width=True)
-
-    # Product performance
-    st.subheader("Product Performance")
-    col1, col2 = st.columns(2)
-
-    with col1:
-        product_sales = df.groupby("Product")["Sales"].sum().reset_index()
-        fig_pie = px.pie(
-            product_sales,
-            values="Sales",
-            names="Product",
-            title="Sales Distribution by Product",
-        )
-        st.plotly_chart(fig_pie)
-
-    with col2:
-        monthly_sales = (
-            df.groupby([df["Date"].dt.strftime("%B"), "Product"])["Sales"]
-            .sum()
-            .reset_index()
-        )
-        monthly_sales.columns = ["Month", "Product", "Sales"]
-        fig_bar = px.bar(
-            monthly_sales,
-            x="Month",
-            y="Sales",
-            color="Product",
-            title="Monthly Sales by Product",
-        )
-        st.plotly_chart(fig_bar)
-
-    # Interactive data table
-    st.subheader("Detailed Sales Data")
-    date_range = st.date_input(
-        "Select Date Range",
-        value=(df["Date"].min(), df["Date"].max()),
-        min_value=df["Date"].min(),
-        max_value=df["Date"].max(),
-    )
-
-    filtered_df = df[
-        (df["Date"] >= pd.Timestamp(date_range[0]))
-        & (df["Date"] <= pd.Timestamp(date_range[1]))
+# Create layout
+app.layout = html.Div(
+    [
+        html.H1("Sales Dashboard", style={"textAlign": "center"}),
+        html.Div(
+            [
+                # Total Sales Time Series
+                html.Div(
+                    [
+                        html.H3("Total Sales Over Time"),
+                        dcc.Graph(
+                            figure=px.line(
+                                df, x="Date", y="Total_Sales", title="Daily Total Sales"
+                            )
+                        ),
+                    ],
+                    style={"width": "100%", "marginBottom": "20px"},
+                ),
+                # Product Sales Comparison
+                html.Div(
+                    [
+                        html.H3("Product Sales Comparison"),
+                        dcc.Graph(
+                            figure=go.Figure(
+                                [
+                                    go.Bar(name=p, x=df["Date"], y=df[f"{p}_Sales"])
+                                    for p in products
+                                ]
+                            ).update_layout(
+                                barmode="stack", title="Daily Product Sales"
+                            )
+                        ),
+                    ],
+                    style={"width": "100%", "marginBottom": "20px"},
+                ),
+                # Summary Statistics
+                html.Div(
+                    [
+                        html.H3("Summary Statistics"),
+                        html.Div(
+                            [
+                                html.Div(
+                                    [
+                                        html.H4("Total Revenue"),
+                                        html.H2(f"${df['Total_Sales'].sum():,.2f}"),
+                                    ],
+                                    style={
+                                        "width": "33%",
+                                        "display": "inline-block",
+                                        "textAlign": "center",
+                                    },
+                                ),
+                                html.Div(
+                                    [
+                                        html.H4("Average Daily Sales"),
+                                        html.H2(f"${df['Total_Sales'].mean():,.2f}"),
+                                    ],
+                                    style={
+                                        "width": "33%",
+                                        "display": "inline-block",
+                                        "textAlign": "center",
+                                    },
+                                ),
+                                html.Div(
+                                    [
+                                        html.H4("Best Selling Product"),
+                                        html.H2(
+                                            max(
+                                                products,
+                                                key=lambda p: df[f"{p}_Sales"].sum(),
+                                            )
+                                        ),
+                                    ],
+                                    style={
+                                        "width": "33%",
+                                        "display": "inline-block",
+                                        "textAlign": "center",
+                                    },
+                                ),
+                            ]
+                        ),
+                    ],
+                    style={"width": "100%", "marginBottom": "20px"},
+                ),
+            ]
+        ),
     ]
-    st.dataframe(
-        filtered_df.groupby("Product")
-        .agg({"Sales": ["sum", "mean"], "Units": ["sum", "mean"]})
-        .round(2)
-    )
+)
 
-
-st.title("Sales Dashboard")
-is_authenticated = st.context.headers.get("X-Auth")
-
-if is_authenticated:
-    st.subheader("Welcome!")
-    display_dashboard()
-else:
-    st.subheader("Welcome, Guest")
-    st.write("Please sign in to view the sales data.")
+if __name__ == "__main__":
+    app.run_server(debug=True)

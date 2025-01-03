@@ -1,4 +1,4 @@
-streamlit
+dash
 plotly
 numpy
 pandas
