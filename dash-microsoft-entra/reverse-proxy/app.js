@@ -51,7 +51,7 @@ app.use('/auth', authRouter);
 
 // setting secure to false since this will proxy to http
 const httpProxy = require("http-proxy");
-const targetURL = "http://localhost:8501/";
+const targetURL = checkEnvVar("DASH_APP_URL");
 const proxy = httpProxy.createProxyServer({
     secure: false,
     target: targetURL,
