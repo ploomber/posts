@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-100 to-slate-200 min-h-screen flex items-center justify-center p-4">
+    <div
+        class="max-w-md w-full bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-10 transition-all duration-300 hover:shadow-xl">
+        <h2 class="text-3xl font-light text-center text-slate-800 mb-10">Login to continue</h2>
+
+        <% if (messages.error) { %>
+            <div class="mb-6 p-4 rounded-lg bg-rose-50 text-rose-600 text-sm font-medium">
+                <%= messages.error %>
+            </div>
+            <% } %>
+
+                <form action="/login" method="POST" class="space-y-8">
+                    <div class="space-y-2">
+                        <label for="username" class="block text-sm font-medium text-slate-600">Username</label>
+                        <input type="text" id="username" name="username" required
+                            class="block w-full px-4 py-3 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-medium text-slate-600">Password</label>
+                        <input type="password" id="password" name="password" required
+                            class="block w-full px-4 py-3 border border-slate-300 rounded-lg bg-slate-50 focus:bg-white transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit"
+                            class="w-full flex justify-center py-3 px-6 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-sm hover:shadow-md">
+                            Sign in
+                        </button>
+                    </div>
+                </form>
+    </div>
+</body>
+
+</html>
