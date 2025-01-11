@@ -1,0 +1,4 @@
+dash
+plotly
+numpy
+pandas
